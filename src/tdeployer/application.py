@@ -20,9 +20,7 @@ class Application:
         if cmd == 'update':
             client.update(service.get_path(stage=stage), stage=stage)
         elif cmd == 'update_repos':
-            # client.update_repos(repos=['qms_backend', 'qms_frontend'], stage=stage)
-            raise Exception('unfinished.')
-            client.update_repos
+            client.update_repos(repos=service.repos, stage=stage)
         elif cmd == 'deploy':
             client.deploy(service.get_path(stage=stage))
         else:
