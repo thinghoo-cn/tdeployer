@@ -1,3 +1,4 @@
+import pathlib
 import argparse
 
 from tdeployer.application import Application
@@ -7,8 +8,20 @@ from tdeployer.config import logger
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='tdeployer is a automation deployer')
     parser.add_argument('command', choices=['update', 'update_code', 'deploy'], help='execute command')
+    parser.add_argument('--name', choices=['qms','supply','mes',], help='project name.')
+    parser.add_argument('--stage', choices=['prd', 'test', 'dev', 'demo'], help='code stage.')
+    parser.add_argument('--config-path',
+                        dest='config_path',
+                        default=str(pathlib.Path.home() /
+                                    '.config/deploy.yml'),
+                        type=str,
+                        help='set config path.')
 
     args = parser.parse_args()
     logger.info(f'command is: {args.command}')
-    conf = Application.config_loader()
-    Application(config=conf, )
+
+    config_path = pathlib.Path(args.config_path)
+    conf = Application.config_loader(config_path)
+    app = Application(config=conf, )
+
+    app.run(cmd=args.command, name=args.name, stage=args.stage)

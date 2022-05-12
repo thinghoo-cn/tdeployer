@@ -5,17 +5,17 @@ from typing import Literal, List
 from .config import stage_constraint
 
 
-class CIClient:
+class ControlClient:
     def __init__(self, connection: Connection) -> None:
         self.c = connection
 
-    def deploy(self, path: str):
+    def deploy(self, path: pathlib.Path):
         """更新远程服务器的服务
 
         Args:
             path (str): _description_
         """
-        with self.c.cd(path):
+        with self.c.cd(str(path)):
             self.c.run("git pull")
             self.c.run("docker-compose up -d --build")
 
