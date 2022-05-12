@@ -1,9 +1,5 @@
-import pathlib
-from typing import Literal
-from fabric import Connection
-from .config import Config, Stage
 from .ciclient import CIClient
-from .server import DeployServer
+from .config import Config
 
 
 class Application:

@@ -15,17 +15,17 @@ class CIClient:
             path (str): _description_
         """
         with self.c.cd(path):
-            self.c.run('git pull')
-            self.c.run('docker-compose up -d --build')
+            self.c.run("git pull")
+            self.c.run("docker-compose up -d --build")
 
-    def update(self, path: pathlib.Path, stage: Literal['dev', 'prd', 'test']):
+    def update(self, path: pathlib.Path, stage: Literal["dev", "prd", "test"]):
         """
         登陆到某台服务器上运行更新服务器命令
         """
         with self.c.cd(str(path)):
             self.c.run(f'inv update --stage="{stage}"')
 
-    def update_repos(self, repos: List[str], stage: Literal['prd', 'test', 'dev']):
+    def update_repos(self, repos: List[str], stage: Literal["prd", "test", "dev"]):
         """this repo depends on tbuilder.
 
         Args:
@@ -34,10 +34,12 @@ class CIClient:
         # repos = ['qms_backend', 'qms_frontend']
         for r in repos:
             with self.c.cd(r):
-                self.c.run('git reset --hard')
-                self.c.run(f'git pull origin {stage}')
+                self.c.run("git reset --hard")
+                self.c.run(f"git pull origin {stage}")
 
-        self.c.run('git pull')
-        self.c.run('git add .')
-        self.c.run(f'git commit --allow-empty -m "feat: update remote repository at {datetime.now().date()}"')
-        self.c.run('git push')
+        self.c.run("git pull")
+        self.c.run("git add .")
+        self.c.run(
+            f'git commit --allow-empty -m "feat: update remote repository at {datetime.now().date()}"'
+        )
+        self.c.run("git push")

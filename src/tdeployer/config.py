@@ -6,7 +6,7 @@ from .errors import TDeployerBaseError
 
 @dataclass
 class Stage:
-    stage: Literal['dev', 'test', 'prd']
+    stage: Literal["dev", "test", "prd"]
     path: pathlib.Path
 
 
@@ -16,8 +16,8 @@ class Config:
     prefix: pathlib.Path
     stages: List[Stage]
 
-    def get_path(self, stage: Literal['dev', 'test', 'prd']):
+    def get_path(self, stage: Literal["dev", "test", "prd"]):
         for s in self.stages:
             if s.stage == stage:
                 return s
-        raise TDeployerBaseError('not a valid stage or stage missing.')
+        raise TDeployerBaseError("not a valid stage or stage missing.")
