@@ -1,8 +1,10 @@
+import os
 import pathlib
 from dataclasses import dataclass
 from serde import serde
 from typing import Dict, List, Literal
 from .errors import TDeployerBaseError
+from loguru import logger
 
 
 stage_constraint = Literal["dev", "test", "prd", 'demo']
@@ -26,3 +28,7 @@ class Config:
             if s.name == stage:
                 return s.path
         raise TDeployerBaseError("not a valid stage or stage missing.")
+
+
+if not os.getenv('DEBUG'):
+    logger.add('deploy.log')

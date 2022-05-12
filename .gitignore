@@ -7,5 +7,7 @@ venv
 __pycache__
 dist
 
+*.log
+deploy.yml
 
 example

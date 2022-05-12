@@ -8,11 +8,10 @@ def test_stage():
     assert s.get_path('prd') == Path('/home')
 
 
-
 def test_serde():
     import pathlib
     p = pathlib.Path(__file__)
     with open(p.parent / 'example.yml') as f:
         data = f.read()
     res = from_yaml(Config, data)
-    print(res)
+    assert res.host == '114.114.114.114'

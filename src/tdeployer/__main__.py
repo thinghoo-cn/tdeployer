@@ -2,4 +2,5 @@ from tdeployer.application import Application
 
 
 if __name__ == "__main__":
-    pass
+    conf = Application.config_loader()
+    Application(config=conf, )

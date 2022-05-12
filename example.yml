@@ -1,0 +1,7 @@
+host: 122.9.153.115
+prefix: /home/svtter
+stages:
+  - name: dev
+    path: work
+  - name: prd
+    path: work
