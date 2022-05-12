@@ -19,5 +19,5 @@ class Config:
     def get_path(self, stage: Literal["dev", "test", "prd"]):
         for s in self.stages:
             if s.stage == stage:
-                return s
+                return s.path
         raise TDeployerBaseError("not a valid stage or stage missing.")
