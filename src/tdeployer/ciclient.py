@@ -8,10 +8,6 @@ class CIClient:
     def __init__(self, connection: Connection) -> None:
         self.c = connection
 
-    def update_command(self, stage: str) -> str:
-        command = f'inv update --stage="{stage}"'
-        return command
-
     def deploy(self, path: str):
         """更新远程服务器的服务
 
@@ -22,14 +18,14 @@ class CIClient:
             self.c.run('git pull')
             self.c.run('docker-compose up -d --build')
 
-    def _run(self, path: pathlib.Path, command):
+    def update(self, path: pathlib.Path, stage: Literal['dev', 'prd', 'test']):
         """
         登陆到某台服务器上运行更新服务器命令
         """
         with self.c.cd(str(path)):
-            self.c.run(command)
+            self.c.run(f'inv update --stage="{stage}"')
 
-    def update(self, repos: List[str], stage: Literal['prd', 'test', 'dev']):
+    def update_repos(self, repos: List[str], stage: Literal['prd', 'test', 'dev']):
         """this repo depends on tbuilder.
 
         Args:
