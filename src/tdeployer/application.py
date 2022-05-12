@@ -7,7 +7,6 @@ from .server import DeployServer
 
 
 class Application:
-    def __init__(self, config: Config, ci_client: CIClient, server: DeployServer) -> None:
+    def __init__(self, config: Config, ci_client: CIClient) -> None:
         self.config = config
         self.ci_client = ci_client
-        self.server = server
