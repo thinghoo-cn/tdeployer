@@ -7,6 +7,7 @@ def test_stage():
     s = Service(name='qms',
                 host='test',
                 prefix=Path('test'),
+                repos=['qms_backend'],
                 stages=[Stage(name='prd', path=Path('/home'))])
     assert s.get_path('prd') == Path('/home')
 
