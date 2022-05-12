@@ -1,6 +1,8 @@
 import pathlib
 import argparse
 
+from pkg_resources import require
+
 from tdeployer.application import Application
 from tdeployer.config import logger
 
@@ -8,8 +10,8 @@ from tdeployer.config import logger
 def cli():
     parser = argparse.ArgumentParser(description='tdeployer is a automation deployer')
     parser.add_argument('command', choices=['update', 'update_code', 'deploy'], help='execute command')
-    parser.add_argument('--name', choices=['qms','supply','mes',], help='project name.')
-    parser.add_argument('--stage', choices=['prd', 'test', 'dev', 'demo'], help='code stage.')
+    parser.add_argument('--name', choices=['qms','supply','mes',], required=True, help='project name.')
+    parser.add_argument('--stage', choices=['prd', 'test', 'dev', 'demo'], required=True, help='code stage.')
     parser.add_argument('--config-path',
                         dest='config_path',
                         default=str(pathlib.Path.home() /
