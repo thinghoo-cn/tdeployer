@@ -2,6 +2,7 @@ import pathlib
 from datetime import datetime
 from fabric import Connection
 from typing import Literal, List
+from .config import stage_constraint
 
 
 class CIClient:
@@ -18,14 +19,14 @@ class CIClient:
             self.c.run("git pull")
             self.c.run("docker-compose up -d --build")
 
-    def update(self, path: pathlib.Path, stage: Literal["dev", "prd", "test"]):
+    def update(self, path: pathlib.Path, stage: stage_constraint):
         """
         登陆到某台服务器上运行更新服务器命令
         """
         with self.c.cd(str(path)):
             self.c.run(f'inv update --stage="{stage}"')
 
-    def update_repos(self, repos: List[str], stage: Literal["prd", "test", "dev"]):
+    def update_repos(self, repos: List[str], stage: stage_constraint):
         """this repo depends on tbuilder.
 
         Args:

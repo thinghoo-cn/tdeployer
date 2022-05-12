@@ -4,9 +4,11 @@ from typing import Dict, List, Literal
 from .errors import TDeployerBaseError
 
 
+stage_constraint = Literal["dev", "test", "prd", 'demo']
+
 @dataclass
 class Stage:
-    stage: Literal["dev", "test", "prd"]
+    stage: stage_constraint
     path: pathlib.Path
 
 
@@ -16,7 +18,7 @@ class Config:
     prefix: pathlib.Path
     stages: List[Stage]
 
-    def get_path(self, stage: Literal["dev", "test", "prd"]):
+    def get_path(self, stage: stage_constraint):
         for s in self.stages:
             if s.stage == stage:
                 return s.path
