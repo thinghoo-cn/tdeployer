@@ -5,7 +5,7 @@ from tdeployer.application import Application
 from tdeployer.config import logger
 
 
-if __name__ == "__main__":
+def cli():
     parser = argparse.ArgumentParser(description='tdeployer is a automation deployer')
     parser.add_argument('command', choices=['update', 'update_code', 'deploy'], help='execute command')
     parser.add_argument('--name', choices=['qms','supply','mes',], help='project name.')
@@ -25,3 +25,7 @@ if __name__ == "__main__":
     app = Application(config=conf, )
 
     app.run(cmd=args.command, name=args.name, stage=args.stage)
+
+
+if __name__ == "__main__":
+    cli()
