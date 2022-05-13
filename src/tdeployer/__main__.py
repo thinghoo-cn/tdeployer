@@ -14,8 +14,7 @@ def cli():
     parser.add_argument('--stage', choices=['prd', 'test', 'dev', 'demo'], required=True, help='code stage.')
     parser.add_argument('--config-path',
                         dest='config_path',
-                        default=str(pathlib.Path.home() /
-                                    '.config/deploy.yml'),
+                        default='/etc/thinghoo/deploy.yml',
                         type=str,
                         help='set config path.')
 
