@@ -16,6 +16,7 @@ class ControlClient:
         with self.c.cd(str(path)):
             self.c.run("git pull")
             self.c.run("docker-compose up -d --build")
+            self.c.run('docker-compose restart nginx')
 
     def update(self, path: pathlib.Path, stage: stage_constraint):
         """
