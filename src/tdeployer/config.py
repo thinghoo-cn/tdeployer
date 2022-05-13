@@ -8,7 +8,7 @@ from .errors import TDeployerBaseError, ServiceNotFound
 from loguru import logger
 
 
-stage_constraint = Literal["dev", "test", "prd", 'demo']
+stage_constraint = Literal["dev", "test", "prd", 'demo', 'master']
 
 @dataclass
 @serde
