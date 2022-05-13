@@ -17,7 +17,7 @@ class ControlClient:
             self.c.run("git pull")
             self.c.run("docker-compose up -d --build")
 
-    def update(self, name: str, path: pathlib.Path, stage: stage_constraint):
+    def update(self, path: pathlib.Path, stage: stage_constraint):
         """
         登陆到某台服务器上运行更新服务器命令
         """
