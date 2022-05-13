@@ -51,4 +51,4 @@ class TotalConfig:
 
 
 if not os.getenv('DEBUG'):
-    logger.add('deploy.log')
+    logger.add('/etc/thinghoo/deploy.log')
