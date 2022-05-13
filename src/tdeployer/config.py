@@ -23,7 +23,6 @@ class Service:
     name: str
     host: str
     prefix: pathlib.Path
-    repos: List[str]
     stages: List[Stage]
 
     def get_path(self, stage: stage_constraint) -> pathlib.Path:
