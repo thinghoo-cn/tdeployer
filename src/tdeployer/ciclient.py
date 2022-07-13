@@ -24,4 +24,4 @@ class ControlClient:
         """
         with self.c.cd(str(path)):
             # 可以考虑在本地构建 compose，然后在过程做拉取
-            self.c.run(f'tbuilder update --stage {stage}')
+            self.c.run(f'tbuilder pull --stage {stage}')
