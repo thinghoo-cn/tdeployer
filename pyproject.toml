@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tdeployer"
-version = "0.2.0"
+version = "0.2.1"
 description = ""
 authors = ["svtter <svtter@qq.com>"]
 
@@ -21,3 +21,8 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 tdeployer = "tdeployer.__main__:cli"
+
+[[tool.poetry.source]]
+name = "private-pypi"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+

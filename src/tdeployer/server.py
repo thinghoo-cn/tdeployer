@@ -1,3 +1,0 @@
-class DeployServer:
-    pass
-
