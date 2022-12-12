@@ -25,4 +25,5 @@ tdeployer = "tdeployer.__main__:cli"
 [[tool.poetry.source]]
 name = "private-pypi"
 url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+default = true
 
