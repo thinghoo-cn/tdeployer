@@ -1,14 +1,20 @@
 import os
 import pathlib
 from dataclasses import dataclass
-from serde import serde
-from typing import Dict, List, Literal
+from typing import List, Literal
+
+from dotenv import find_dotenv, load_dotenv
 from fabric import Connection
-from .errors import TDeployerBaseError, ServiceNotFound
 from loguru import logger
+from serde import serde
+
+from .errors import ServiceNotFound, TDeployerBaseError
+
+load_dotenv(find_dotenv())
 
 
-stage_constraint = Literal["dev", "test", "prd", 'demo', 'master']
+stage_constraint = Literal["dev", "test", "prd", "demo", "master"]
+
 
 @dataclass
 @serde
@@ -46,8 +52,8 @@ class TotalConfig:
         for s in self.services:
             if name == s.name:
                 return s
-        raise ServiceNotFound(f'service.{name} not found.')
+        raise ServiceNotFound(f"service.{name} not found.")
 
 
-if not os.getenv('DEBUG'):
-    logger.add('/var/log/thinghoo/deploy.log')
+if not os.getenv("DEBUG"):
+    logger.add("/var/log/thinghoo/deploy.log")

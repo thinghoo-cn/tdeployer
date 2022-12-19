@@ -11,6 +11,7 @@ python = "^3.9"
 Fabric = "^2.7.0"
 pyserde = {extras = ["toml", "yaml"], version = "^0.7.3"}
 loguru = "^0.6.0"
+python-dotenv = "^0.21.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.2"
