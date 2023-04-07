@@ -1,5 +1,7 @@
 import pathlib
+
 from fabric import Connection
+
 from .config import stage_constraint
 
 
@@ -16,7 +18,7 @@ class ControlClient:
         with self.c.cd(str(path)):
             self.c.run("git pull")
             self.c.run("docker-compose up -d --build")
-            self.c.run('docker-compose restart nginx')
+            self.c.run("docker-compose restart nginx")
 
     def update(self, path: pathlib.Path, stage: stage_constraint):
         """
@@ -24,4 +26,4 @@ class ControlClient:
         """
         with self.c.cd(str(path)):
             # 可以考虑在本地构建 compose，然后在过程做拉取
-            self.c.run(f'tbuilder pull --stage {stage}')
+            self.c.run(f"tbuilder pull --stage {stage}")
