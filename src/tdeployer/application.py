@@ -1,7 +1,7 @@
 import pathlib
 import sys
 
-from serde.yaml import from_yaml, to_yaml
+from serde.yaml import from_yaml
 
 from .ciclient import ControlClient
 from .config import TotalConfig, logger, stage_constraint
@@ -17,19 +17,20 @@ class Application:
         conn = service.get_connection()
         client = ControlClient(connection=conn)
 
-        if cmd == 'update':
+        if cmd == "update":
             client.update(service.get_path(stage=stage), stage=stage)
-        elif cmd == 'deploy':
+        elif cmd == "deploy":
             client.deploy(service.get_path(stage=stage))
         else:
-            raise InvalidCommand(f'invalid cmd: <{cmd}>.')
+            raise InvalidCommand(f"invalid cmd: <{cmd}>.")
 
     @staticmethod
-    def config_loader(path: pathlib.Path=pathlib.Path('./deploy.yml')):
+    def config_loader(path: pathlib.Path = pathlib.Path("./deploy.yml")):
         import pathlib
+
         conf_file = pathlib.Path(path)
         if not conf_file.exists():
-            logger.error('missing deploy.yml')
+            logger.error("missing deploy.yml")
             sys.exit(1)
 
         data = conf_file.read_text()
