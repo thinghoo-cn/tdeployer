@@ -1,5 +1,6 @@
 import pathlib
 import sys
+from typing import Optional
 
 from serde.yaml import from_yaml
 
@@ -11,23 +12,22 @@ from .errors import InvalidCommand
 class Application:
     def __init__(self, config: TotalConfig) -> None:
         self.config = config
+        self.client: Optional[ControlClient] = None
 
     def run(self, name: str, cmd: str, stage: stage_constraint):
         service = self.config.get_service(name=name)
         conn = service.get_connection()
-        client = ControlClient(connection=conn)
+        self.client = ControlClient(connection=conn)
 
         if cmd == "update":
-            client.update(service.get_path(stage=stage), stage=stage)
+            self.client.update(service.get_path(stage=stage), stage=stage)
         elif cmd == "deploy":
-            client.deploy(service.get_path(stage=stage))
+            self.client.deploy(service.get_path(stage=stage))
         else:
             raise InvalidCommand(f"invalid cmd: <{cmd}>.")
 
     @staticmethod
     def config_loader(path: pathlib.Path = pathlib.Path("./deploy.yml")):
-        import pathlib
-
         conf_file = pathlib.Path(path)
         if not conf_file.exists():
             logger.error("missing deploy.yml")
