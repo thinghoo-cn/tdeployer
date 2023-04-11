@@ -1,13 +1,14 @@
 import argparse
 import pathlib
 
+from tdeployer import __version__
 from tdeployer.application import Application
 from tdeployer.config import logger
 
 
 def cli():
     parser = argparse.ArgumentParser(
-        description="tdeployer is a automation deployer. Updating the confirmed code to cdserver."
+        description=f"tdeployer is a automation deployer. version: {__version__}, Updating the confirmed code to cdserver."
     )
     parser.add_argument("command", choices=["update", "deploy"], help="execute command")
     parser.add_argument("--name", required=True, help="project name.")
