@@ -34,8 +34,8 @@ class ControlClient:
         try:
             with self.c.cd(str(path)):
                 # 可以考虑在本地构建 compose，然后在过程做拉取
-                self.c.run(f"tbuilder pull --stage {stage}")
+                self.c.run(f"tbuilder pull --stage {stage}", file=sys.stderr)
         except invoke.exceptions.UnexpectedExit:
             # TODO: log to files.
-            print("CD server meet error.")
+            print("CD server meet error.", file=sys.stderr)
             sys.exit(-1)
