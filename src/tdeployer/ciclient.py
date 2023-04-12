@@ -1,5 +1,7 @@
 import pathlib
+import sys
 
+import invoke
 from fabric import Connection
 
 from .config import stage_constraint
@@ -15,15 +17,25 @@ class ControlClient:
         Args:
             path (str): _description_
         """
-        with self.c.cd(str(path)):
-            self.c.run("git pull")
-            self.c.run("docker-compose up -d --build")
-            self.c.run("docker-compose restart nginx")
+        try:
+            with self.c.cd(str(path)):
+                self.c.run("git pull")
+                self.c.run("docker-compose up -d --build")
+                self.c.run("docker-compose restart nginx")
+        except invoke.exceptions.UnexpectedExit:
+            # TODO: log to files.
+            print("CD server meet error.")
+            sys.exit(-1)
 
     def update(self, path: pathlib.Path, stage: stage_constraint):
         """
         登陆到某台服务器上运行更新服务器命令
         """
-        with self.c.cd(str(path)):
-            # 可以考虑在本地构建 compose，然后在过程做拉取
-            self.c.run(f"tbuilder pull --stage {stage}")
+        try:
+            with self.c.cd(str(path)):
+                # 可以考虑在本地构建 compose，然后在过程做拉取
+                self.c.run(f"tbuilder pull --stage {stage}")
+        except invoke.exceptions.UnexpectedExit:
+            # TODO: log to files.
+            print("CD server meet error.")
+            sys.exit(-1)
