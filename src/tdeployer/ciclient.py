@@ -24,7 +24,7 @@ class ControlClient:
                 self.c.run("docker-compose restart nginx")
         except invoke.exceptions.UnexpectedExit:
             # TODO: log to files.
-            print("CD server meet error.")
+            print("CD server meet error.", file=sys.stderr)
             sys.exit(-1)
 
     def update(self, path: pathlib.Path, stage: stage_constraint):
@@ -34,7 +34,7 @@ class ControlClient:
         try:
             with self.c.cd(str(path)):
                 # 可以考虑在本地构建 compose，然后在过程做拉取
-                self.c.run(f"tbuilder pull --stage {stage}", file=sys.stderr)
+                self.c.run(f"tbuilder pull --stage {stage}")
         except invoke.exceptions.UnexpectedExit:
             # TODO: log to files.
             print("CD server meet error.", file=sys.stderr)
