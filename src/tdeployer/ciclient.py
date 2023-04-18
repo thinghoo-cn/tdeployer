@@ -4,8 +4,6 @@ import sys
 import invoke
 from fabric import Connection
 
-from .config import stage_constraint
-
 
 class ControlClient:
     def __init__(self, connection: Connection) -> None:
@@ -27,7 +25,7 @@ class ControlClient:
             print("CD server meet error.", file=sys.stderr)
             sys.exit(-1)
 
-    def update(self, path: pathlib.Path, stage: stage_constraint):
+    def update(self, path: pathlib.Path, stage: str):
         """
         登陆到某台服务器上运行更新服务器命令
         """
