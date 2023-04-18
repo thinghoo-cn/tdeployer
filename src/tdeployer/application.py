@@ -24,7 +24,7 @@ class Application:
         elif cmd == "deploy":
             self.client.deploy(service.get_path(stage=stage))
         else:
-            raise InvalidCommand(f"invalid cmd: <{cmd}>.")
+            print(f"invalid cmd: <{cmd}>.")
 
     @staticmethod
     def config_loader(path: pathlib.Path = pathlib.Path("./deploy.yml")):

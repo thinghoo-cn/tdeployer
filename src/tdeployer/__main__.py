@@ -14,7 +14,6 @@ def cli():
     parser.add_argument("--name", required=True, help="project name.")
     parser.add_argument(
         "--stage",
-        choices=["prd", "test", "dev", "demo", "master"],
         required=True,
         help="code stage.",
     )
