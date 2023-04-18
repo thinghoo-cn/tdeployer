@@ -14,7 +14,7 @@ class Application:
         self.config = config
         self.client: Optional[ControlClient] = None
 
-    def run(self, name: str, cmd: str, stage: stage_constraint):
+    def run(self, name: str, cmd: str, stage: str):
         service = self.config.get_service(name=name)
         conn = service.get_connection()
         self.client = ControlClient(connection=conn)
