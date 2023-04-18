@@ -5,7 +5,7 @@ from typing import Optional
 from serde.yaml import from_yaml
 
 from .ciclient import ControlClient
-from .config import TotalConfig, logger, stage_constraint
+from .config import TotalConfig, logger
 from .errors import InvalidCommand
 
 
