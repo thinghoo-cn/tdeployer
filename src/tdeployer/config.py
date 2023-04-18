@@ -1,4 +1,5 @@
 import os
+import sys
 import pathlib
 from dataclasses import dataclass
 from typing import List, Literal
@@ -13,13 +14,10 @@ from .errors import ServiceNotFound, TDeployerBaseError
 load_dotenv(find_dotenv())
 
 
-stage_constraint = Literal["dev", "test", "prd", "demo", "master"]
-
-
 @dataclass
 @serde
 class Stage:
-    name: stage_constraint
+    name: str
     path: pathlib.Path
 
 
@@ -31,11 +29,13 @@ class Service:
     prefix: pathlib.Path
     stages: List[Stage]
 
-    def get_path(self, stage: stage_constraint) -> pathlib.Path:
+    def get_path(self, stage: str) -> pathlib.Path:
         for s in self.stages:
             if s.name == stage:
                 return s.path
-        raise TDeployerBaseError("not a valid stage or stage missing.")
+        print(f'{stage} is not a valid stage or stage missing', file=sys.stderr)
+        sys.exit(-1)
+        # raise TDeployerBaseError("not a valid stage or stage missing.")
 
     def get_connection(self):
         c = Connection(host=self.host, user="root", port=22)
