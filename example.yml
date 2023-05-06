@@ -9,11 +9,17 @@ services:
       - qms_frontend
     stages:
       - name: dev
-        path: work
+        path: 
+           - work
+           - work2
       - name: prd
-        path: work
+        path: 
+           - work
+           - work2
       - name: master
-        path: work
+        path: 
+           - work
+           - work2
   - name: mes
     host: 1414141
     prefix: /sdfsdffsdfd
