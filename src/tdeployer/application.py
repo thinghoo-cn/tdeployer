@@ -18,11 +18,14 @@ class Application:
         service = self.config.get_service(name=name)
         conn = service.get_connection()
         self.client = ControlClient(connection=conn)
+        pathlist = service.get_path(stage=stage)
 
         if cmd == "update":
-            self.client.update(service.get_path(stage=stage), stage=stage)
+            for path in pathlist:
+                self.client.update(path, stage=stage)
         elif cmd == "deploy":
-            self.client.deploy(service.get_path(stage=stage))
+            for path in pathlist:
+                self.client.deploy(path)
         else:
             print(f"invalid cmd: <{cmd}>.")
 
