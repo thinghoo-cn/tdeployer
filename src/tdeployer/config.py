@@ -18,7 +18,7 @@ load_dotenv(find_dotenv())
 @serde
 class Stage:
     name: str
-    path: pathlib.Path
+    path: List[pathlib.Path]
 
 
 @dataclass
@@ -29,7 +29,7 @@ class Service:
     prefix: pathlib.Path
     stages: List[Stage]
 
-    def get_path(self, stage: str) -> pathlib.Path:
+    def get_path(self, stage: str) -> List[pathlib.Path]:
         for s in self.stages:
             if s.name == stage:
                 return s.path
